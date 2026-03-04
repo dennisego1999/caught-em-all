@@ -13,6 +13,7 @@ src/
 │   └── HttpClient.ts
 └── Pokemon/
     ├── IPokemon.ts
+    ├── IPokemonRepository.ts
     ├── PokemonClient.ts
     ├── PokemonDTO.ts
     ├── PokemonRepository.ts
@@ -21,11 +22,14 @@ src/
 
 The app follows a `Service → Repository → Client` chain. Each layer has one responsibility.
 
-- **HttpClient** — generic base class for HTTP requests. It is not tied to any specific API
+- **IHttpClient** — contract any HTTP client must implement, makes the client layer swappable
+- **IRepository** — generic contract any repository must implement, generic `T` defines the return type
+- **IPokemonRepository** — extends `IRepository<PokemonDTO>` with Pokémon-specific methods like `findByName`
+- **HttpClient** — generic base class for HTTP requests, not tied to any specific API
 - **PokemonClient** — extends `HttpClient`, provides the PokéAPI base URL
 - **PokemonRepository** — fetches Pokémon-specific data, owns the endpoints. The only place that changes if an endpoint changes
-- **PokemonDTO** — validates and maps the raw API response
-- **PokemonService** — orchestrates repository calls and applies business logic such as formatting, filtering, and combining data. Never fetches directly
+- **PokemonDTO** — validates and maps the raw API response, acts as the boundary of trust between the API and the app
+- **PokemonService** — does repository calls and applies business logic. Never fetches directly
 
 ## Requirements
 
