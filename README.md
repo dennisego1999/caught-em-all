@@ -1,27 +1,39 @@
 # caught-em-all
 
-This template should help get you started developing with Vue 3 in Vite.
+A Vue app which consumes the [PokéAPI](https://pokeapi.co/).
 
-## Recommended IDE Setup
+## Architecture
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+```
+src/
+├── Contracts/
+│   ├── IHttpClient.ts
+│   └── IRepository.ts
+├── Http/
+│   └── HttpClient.ts
+└── Pokemon/
+    ├── IPokemon.ts
+    ├── PokemonClient.ts
+    ├── PokemonDTO.ts
+    ├── PokemonRepository.ts
+    └── PokemonService.ts
+```
 
-## Recommended Browser Setup
+The app follows a `Service → Repository → Client` chain. Each layer has one responsibility.
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- **HttpClient** — generic base class for HTTP requests. It is not tied to any specific API
+- **PokemonClient** — extends `HttpClient`, provides the PokéAPI base URL
+- **PokemonRepository** — fetches Pokémon-specific data, owns the endpoints. The only place that changes if an endpoint changes
+- **PokemonDTO** — validates and maps the raw API response
+- **PokemonService** — orchestrates repository calls and applies business logic such as formatting, filtering, and combining data. Never fetches directly
 
-## Type Support for `.vue` Imports in TS
+## Requirements
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+Ensure you are using the correct Node.js version by running the following command in the root of the repository:
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
+```sh
+nvm use
+```
 
 ## Project Setup
 

@@ -1,11 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted, ref, type Ref } from "vue";
+import type PokemonDTO from "./Pokemon/PokemonDTO";
+import PokemonService from "./Pokemon/PokemonService";
+
+const pokemon: Ref<PokemonDTO | null> = ref(null);
+
+onMounted(async () => {
+  pokemon.value = await PokemonService.instance.findRandom();
+});
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
-</template>
+  <h1>Random Pokémon</h1>
 
-<style scoped></style>
+  <span v-if="pokemon">
+    {{ pokemon }}
+  </span>
+</template>
