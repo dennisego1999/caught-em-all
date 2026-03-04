@@ -30,9 +30,7 @@ export default class PokemonService {
     return this.repo.findById(id);
   }
 
-  public async isHeavierThan(nameA: string, nameB: string): Promise<string> {
-    const [a, b] = await Promise.all([this.repo.findByName(nameA), this.repo.findByName(nameB)]);
-
+  public compareWeight(a: PokemonDTO, b: PokemonDTO): string {
     return a.weight > b.weight
       ? `${a.name} is heavier than ${b.name}`
       : `${b.name} is heavier than ${a.name}`;

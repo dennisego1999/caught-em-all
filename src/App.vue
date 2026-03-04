@@ -11,9 +11,9 @@ onMounted(async () => {
   pokemonA.value = await PokemonService.instance.findRandom();
   pokemonB.value = await PokemonService.instance.findRandom();
 
-  weightComparison.value = await PokemonService.instance.isHeavierThan(
-    pokemonA.value.name,
-    pokemonB.value.name,
+  weightComparison.value = await PokemonService.instance.compareWeight(
+    pokemonA.value,
+    pokemonB.value,
   );
 });
 </script>
