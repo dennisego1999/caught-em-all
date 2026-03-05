@@ -8,8 +8,8 @@ A Vue app which consumes the [PokéAPI](https://pokeapi.co/).
 
 ```
 src/
-├── js/
-    ├── Classes/
+└── js/
+    └── Classes/
         ├── Clients/
         │   └── HttpClient.ts
         ├── Contracts/

@@ -4,7 +4,7 @@ import { useAttrs } from "vue";
 interface Props {
   tag?: string;
   container?: string | null;
-  size?: string | null;
+  size?: number | null;
   minSize?: string | null;
   flexDirection?: string;
   gutter?: string | null;
@@ -28,14 +28,14 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   tag: "section",
   container: null,
-  size: null,
+  size: 10,
   minSize: null,
   flexDirection: "column",
-  gutter: null,
+  gutter: "both",
   gutterSize: null,
-  padding: null,
-  paddingSize: null,
-  theme: null,
+  padding: "top",
+  paddingSize: "medium",
+  theme: "light",
   background: true,
   align: null,
   justify: null,
