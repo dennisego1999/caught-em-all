@@ -1,9 +1,10 @@
 import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router";
-import PokemonClient from "./Pokemon/PokemonClient";
-import PokemonRepository from "./Pokemon/PokemonRepository";
-import PokemonService from "./Pokemon/PokemonService";
+import "./styles/app.scss";
+import App from "./js/Layouts/AppLayout.vue";
+import router from "./js/Router";
+import PokemonClient from "./js/Classes/Pokemon/PokemonClient";
+import PokemonRepository from "./js/Classes/Pokemon/PokemonRepository";
+import PokemonService from "./js/Classes/Pokemon/PokemonService";
 
 const app = createApp(App);
 

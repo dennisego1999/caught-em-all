@@ -1,4 +1,4 @@
-import HttpClient from "@/Clients/HttpClient";
+import HttpClient from "@/js/Classes/Clients/HttpClient";
 
 export default class PokemonClient extends HttpClient {
   constructor() {

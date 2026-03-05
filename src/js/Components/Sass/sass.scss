@@ -1,0 +1,49 @@
+@use 'sass:math';
+@use 'sass:map';
+
+$breakpoints: (
+	sm: 375,
+	md: 640,
+	lg: 1024,
+	xl: 1140,
+	design: 1440,
+	hd: 1920,
+);
+
+@function breakpoint($breakpoint, $offset: 0) {
+	@return map.get($breakpoints, $breakpoint) + 0px + $offset;
+}
+
+@function strip-unit($number) {
+	@return math.div($number, ($number * 0 + 1));
+}
+
+@function rem($px) {
+	@return calc(strip-unit($px) / 16) + 0rem;
+}
+
+@function rnd($number, $places: 0) {
+	$n: 1;
+
+	@if $places > 0 {
+		@for $i from 1 through $places {
+			$n: $n * 10;
+		}
+	}
+
+	@return math.div(math.round($number * $n), $n);
+}
+
+@function fluid($min-px, $max-px, $infinit: true, $slopeUnit: cqi, $min-bp: breakpoint('sm'), $max-bp: breakpoint('hd')) {
+	$slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+	$slope-perc: rnd($slope * 100, 2);
+	$intercept-rems: rnd(rem($min-px - $slope * $min-bp), 2);
+	$min-rems: rnd(rem($min-px), 2);
+	$max-rems: rnd(rem($max-px), 2);
+
+	@if($infinit) {
+		$max-rems: 10000rem;
+	}
+
+	@return clamp(min(#{$min-rems}, #{$max-rems}), #{$intercept-rems} + #{$slope-perc}#{$slopeUnit}, max(#{$min-rems}, #{$max-rems}));
+}

@@ -1,0 +1,38 @@
+@layer fundaments {
+	[data-clamp]:not([data-clamp='false']) {
+		--clamp: 0;
+
+		&:not([data-clamp='1']) {
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: var(--clamp);
+			line-clamp: var(--clamp);
+			overflow-y: clip;
+		}
+
+		&[data-clamp='1'] {
+			--clamp: 1;
+			display: block;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: clip;
+			max-width: 100%;
+		}
+
+		&[data-clamp='2'] {
+			--clamp: 2;
+		}
+
+		&[data-clamp='3'] {
+			--clamp: 3;
+		}
+
+		&[data-clamp='4'] {
+			--clamp: 4;
+		}
+
+		&[data-clamp='5'] {
+			--clamp: 5;
+		}
+	}
+}

@@ -1,4 +1,4 @@
-import type PokemonDTO from "@/Pokemon/PokemonDTO";
+import type PokemonDTO from "@/js/Pokemon/PokemonDTO";
 import type IPokemonRepository from "./IPokemonRepository";
 
 export default class PokemonService {

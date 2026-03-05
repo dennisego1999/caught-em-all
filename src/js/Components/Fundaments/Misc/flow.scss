@@ -1,0 +1,78 @@
+@layer fundaments {
+	:root {
+		--base-gap: .75em;
+	}
+
+	[data-flow]:not([data-flow="false"]) {
+		--flow-base-gap: var(--base-gap, .75em);
+		--flow-p-gap: var(--p-gap, var(--flow-base-gap));
+
+		& > * {
+			margin: 0;
+		}
+
+		& > .section + .section {
+			margin-block-start: var(--flow-base-gap);
+		}
+
+		& > *:is(.heading, h1, h2, h3, h4, h5, h6, .text) {
+			margin-block-start: var(--flow-base-gap);
+		}
+
+		& *:is(p, ul, ol, table) {
+			margin-block-start: var(--flow-base-gap);
+		}
+
+		& p + p {
+			margin-block-start: var(--flow-p-gap);
+		}
+
+		& li {
+			margin-block-start: var(--flow-base-gap);
+		}
+
+		& > :is(.heading, h1, h2, h3, h4, h5, h6) + :is(.heading, h1, h2, h3, h4, h5, h6) {
+			margin-block-start: calc(var(--flow-base-gap) / 2);
+		}
+
+		& > :is(.heading, h1, h2, h3, h4, h5, h6):has(em) + :is(.heading, h1, h2, h3, h4, h5, h6) {
+			margin-block-start: calc(var(--flow-base-gap) / 8);
+		}
+
+		& > :is(.heading, h1, h2, h3, h4, h5, h6) + :is(.text, p, ul, ol) {
+			margin-block-start: calc(var(--flow-base-gap) * 1);
+		}
+
+		& > *:is(.visual, img) {
+			margin-block-start: calc(var(--flow-base-gap) * 1.5);
+		}
+
+		& > *:is(.actions) {
+			margin-block-start: calc(var(--flow-base-gap) * 2);
+		}
+
+		& :first-child {
+			margin-block-start: 0 !important;
+		}
+
+		& :last-child {
+			margin-block-end: 0;
+		}
+
+		& *:is(ul, ol) {
+			padding-inline: 1em;
+		}
+
+		& *:is(ul, ol, table):not(:last-child) {
+			margin-block-end: 1.5em;
+		}
+
+		& > *.spacer {
+			margin-block-start: 0;
+		}
+
+		& > .spacer + * {
+			margin-block-start: 0;
+		}
+	}
+}

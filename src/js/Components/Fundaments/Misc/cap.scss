@@ -1,0 +1,10 @@
+:root {
+	--cap: 1;
+}
+
+@layer fundaments {
+	[data-cap]:not([data-cap='false']) {
+		margin: 0;
+		line-height: var(--cap) !important;
+	}
+}

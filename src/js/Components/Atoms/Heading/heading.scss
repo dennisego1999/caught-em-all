@@ -1,0 +1,107 @@
+@use "../../sass/sass.scss";
+
+@layer atoms {
+  :root {
+    --heading-font: "Roboto", sans-serif;
+    --heading-font-size-base: #{sass.fluid(16px, 28px)};
+    --heading-font-size: inherit;
+    --heading-font-weight: 500;
+    --heading-line-height: 1.2;
+
+    --heading-font-size-scale-heading: 1.25;
+    --heading-font-size-0: calc(
+      var(--heading-font-size-1) * var(--heading-font-size-scale-heading)
+    );
+    --heading-font-size-1: calc(
+      var(--heading-font-size-2) * var(--heading-font-size-scale-heading)
+    );
+    --heading-font-size-2: calc(
+      var(--heading-font-size-3) * var(--heading-font-size-scale-heading)
+    );
+    --heading-font-size-3: calc(
+      var(--heading-font-size-4) * var(--heading-font-size-scale-heading)
+    );
+    --heading-font-size-4: calc(
+      var(--heading-font-size-5) * var(--heading-font-size-scale-heading)
+    );
+    --heading-font-size-5: calc(
+      var(--heading-font-size-base) * var(--heading-font-size-scale-heading)
+    );
+    --heading-font-size-6: var(--heading-font-size-base);
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) {
+    margin: 0;
+  }
+
+  .heading,
+  .text :is(h1, h2, h3, h4, h5, h6) {
+    transition: color var(--transition-speed);
+    color: var(--color, var(--color-heading));
+    font-family: var(--text-font);
+    font-size: var(--text-font-size);
+    font-weight: var(--text-font-weight);
+    line-height: var(--text-line-height);
+    text-wrap: pretty;
+    user-select: inherit;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+
+    a[href]:not([href=""]) {
+      transition: color var(--transition-speed);
+      color: var(--color-heading);
+      text-decoration: none;
+
+      &:hover {
+        @media (hover: hover) {
+          color: var(--color-link);
+        }
+      }
+    }
+
+    strong {
+      font-weight: 700;
+    }
+
+    em {
+      font-family: Georgia, var(--text-font);
+      color: var(--color-em);
+      font-style: italic;
+    }
+
+    small {
+      font-size: 0.833em;
+      font-weight: initial;
+    }
+
+    mark {
+      padding: 0.1em 0;
+      color: currentColor;
+      background-image: linear-gradient(to right, var(--color-mark) 100%, transparent 100%);
+      background-position: 0em 100%;
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+
+    &[data-variant="tint"] {
+      color: color-mix(in srgb, var(--color, var(--color-heading)), transparent 25%);
+    }
+  }
+
+  @for $i from 0 to 7 {
+    .heading[data-heading-size="#{$i}"],
+    .text h#{$i} {
+      --text-font: var(--heading-font-#{$i}, var(--heading-font));
+      --text-font-size: var(--heading-font-size-#{$i});
+      --text-line-height: var(--heading-line-height-#{$i}, var(--heading-line-height));
+      --text-font-weight: var(--heading-font-weight-#{$i}, var(--heading-font-weight));
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .carousel__header:has(.filter-heading) {
+      gap: 0;
+    }
+  }
+}

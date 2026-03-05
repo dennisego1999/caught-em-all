@@ -1,0 +1,31 @@
+@layer fundaments {
+	[data-text-align='left'] {
+		&[data-force-align]:not([data-force-align='false']) {
+			text-align: left;
+		}
+
+		@container (min-width: 768px) {
+			text-align: left;
+		}
+	}
+
+	[data-text-align='center'] {
+		&[data-force-align]:not([data-force-align='false']) {
+			text-align: center;
+		}
+
+		@container (min-width: 768px) {
+			text-align: center;
+		}
+	}
+
+	[data-text-align='right'] {
+		&[data-force-align]:not([data-force-align='false']) {
+			text-align: right;
+		}
+
+		@container (min-width: 768px) {
+			text-align: right;
+		}
+	}
+}

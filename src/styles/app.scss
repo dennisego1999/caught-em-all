@@ -1,0 +1,31 @@
+@use "../js/Components/Fundaments/**/*.scss";
+@use "../js/Components/Atoms/**/*.scss";
+@use "../js/Components/Molecules/**/*.scss";
+@use "../js/Components/Organisms/**/*.scss";
+
+@layer layouts {
+  body {
+    container-type: inline-size;
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+
+  #app {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #app > #main {
+    flex: auto;
+  }
+}

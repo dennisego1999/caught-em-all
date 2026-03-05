@@ -1,0 +1,24 @@
+@use '../color/color.scss';
+
+:root {
+	--outline-width: .125em;
+	--outline-style: solid;
+	--outline-offset: .125em;
+	--outline-offset-inner: -.35em;
+}
+
+@layer fundaments {
+	*:focus-visible,
+	*:focus-visible > img {
+		outline-width: var(--outline-width);
+		outline-color: var(--color-outline);
+		outline-style: var(--outline-style);
+		outline-offset: var(--outline-offset);
+	}
+
+	*:focus-visible > img {
+		--outline-width: .25em;
+		--color-outline: var(--color-highlight);
+		--outline-offset: var(--outline-offset-inner);
+	}
+}

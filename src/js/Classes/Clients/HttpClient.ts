@@ -1,5 +1,5 @@
-import type IHttpClient from "@/Contracts/IHttpClient";
-import HttpError from "@/Errors/HttpError";
+import type IHttpClient from "@/js/Classes/Contracts/IHttpClient";
+import HttpError from "@/js/Classes/Errors/HttpError";
 
 export default class HttpClient implements IHttpClient {
   constructor(private _baseUrl: string) {

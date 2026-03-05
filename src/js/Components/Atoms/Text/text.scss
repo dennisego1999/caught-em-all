@@ -1,0 +1,151 @@
+@use "../../Sass/sass.scss";
+
+@layer atoms {
+  :root {
+    --text-font: "Roboto", sans-serif;
+    --text-font-size-base: #{sass.fluid(16px, 20px)};
+    --text-font-size: var(--text-font-size-base);
+    --text-font-weight: inherit;
+    --text-line-height: 1.5;
+
+    --text-font-size-scale-text: 1.125;
+    --text-font-size-0: calc(var(--text-font-size-base) * var(--text-font-size-scale-text));
+    --text-font-size-1: var(--text-font-size-base);
+    --text-font-size-2: calc(var(--text-font-size-base) / var(--text-font-size-scale-text));
+    --text-font-size-3: calc(var(--text-font-size-2) / var(--text-font-size-scale-text));
+    --text-font-size-4: calc(var(--text-font-size-3) / var(--text-font-size-scale-text));
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  .text {
+    --text-color: var(--color, var(--color-text));
+
+    transition: color var(--transition-speed);
+    color: var(--text-color);
+    font-family: var(--text-font);
+    font-size: var(--text-font-size);
+    font-weight: var(--text-font-weight);
+    line-height: var(--text-line-height);
+    user-select: inherit;
+    text-wrap: pretty;
+
+    ol {
+      list-style-type: decimal;
+    }
+
+    ul {
+      list-style-type: disc;
+    }
+
+    li {
+      padding-left: 0.5em;
+    }
+
+    li::marker {
+      color: var(--color-marker);
+      font-size: 0.85em;
+    }
+
+    a[href]:not([href=""], .action) {
+      color: var(--color-link);
+      text-decoration: underline;
+    }
+
+    strong {
+      font-weight: 500;
+    }
+
+    em {
+      font-family: Georgia, var(--text-font);
+      color: var(--color-em);
+      font-style: italic;
+      vertical-align: text-top;
+    }
+
+    small {
+      font-size: 0.833em;
+      font-weight: initial;
+    }
+
+    mark {
+      padding: 0.1em 0;
+      color: var(--color-text);
+      background-image: linear-gradient(to right, var(--color-mark) 100%, transparent 100%);
+      background-position: 0em 100%;
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+
+    table {
+      display: block;
+      width: 100% !important;
+      height: auto !important;
+      background-color: transparent;
+      overflow: auto;
+    }
+
+    th {
+      background-color: color-mix(in srgb, var(--color-accent), transparent 80%);
+    }
+
+    th,
+    td {
+      padding: 0.75em 1em;
+      color: var(--color-text);
+      font-size: 1em !important;
+      border: 1px solid color-mix(in srgb, var(--color-text), transparent 70%);
+    }
+
+    td > * {
+      font-size: 1em !important;
+      color: var(--color-text);
+    }
+
+    blockquote,
+    q {
+      font-family: Georgia;
+      font-style: italic;
+      font-size: 1.75em;
+    }
+
+    blockquote:before {
+      content: open-quote;
+      padding-inline-end: 0.25em;
+    }
+
+    blockquote:after {
+      content: close-quote;
+      padding-inline-start: 0.25em;
+    }
+
+    &[data-variant="tint"] {
+      opacity: 0.65;
+    }
+
+    &[data-wrap="false"] {
+      white-space: nowrap;
+    }
+  }
+
+  [data-font-size="inherit"] {
+    --text-font-size: inherit;
+  }
+
+  @for $i from 0 to 5 {
+    [data-font-size="#{$i}"] {
+      --text-font-size: var(--text-font-size-#{$i});
+    }
+  }
+
+  ::selection {
+    color: var(--color-background);
+    background-color: var(--color-text);
+    text-shadow: none;
+  }
+}

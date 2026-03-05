@@ -8,18 +8,23 @@ A Vue app which consumes the [PokéAPI](https://pokeapi.co/).
 
 ```
 src/
-├── Contracts/
-│   ├── IHttpClient.ts
-│   └── IRepository.ts
-├── Http/
-│   └── HttpClient.ts
-└── Pokemon/
-    ├── IPokemon.ts
-    ├── IPokemonRepository.ts
-    ├── PokemonClient.ts
-    ├── PokemonDTO.ts
-    ├── PokemonRepository.ts
-    └── PokemonService.ts
+├── js/
+    ├── Classes/
+        ├── Clients/
+        │   └── HttpClient.ts
+        ├── Contracts/
+        │   ├── IHttpClient.ts
+        │   └── IRepository.ts
+        ├── Errors/
+        │   ├── HttpError.ts
+        │   └── InvalidPokemonError.ts
+        └── Pokemon/
+            ├── IPokemon.ts
+            ├── IPokemonRepository.ts
+            ├── PokemonClient.ts
+            ├── PokemonDTO.ts
+            ├── PokemonRepository.ts
+            └── PokemonService.ts
 ```
 
 The app follows a `Service → Repository → Client` chain. Each layer has one responsibility and only talks to the layer directly below it through a contract.

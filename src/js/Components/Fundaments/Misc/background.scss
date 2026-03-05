@@ -1,0 +1,13 @@
+@layer fundaments {
+	[data-background="true"] {
+		background-color: var(--color-background);
+	}
+
+	[data-background="gradient"] {
+		background-image: var(--color-gradient);
+	}
+
+	[data-background="blur"] {
+		backdrop-filter: blur(8px);
+	}
+}
