@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import SectionWeightBattle from "@/js/Components/Organisms/SectionWeightBattle/SectionWeightBattle.vue";
+import SectionOnboarding from "../Components/Organisms/SectionOnboarding/SectionOnboarding.vue";
 </script>
 
 <template>
-  <SectionWeightBattle />
+  <SectionOnboarding />
 </template>

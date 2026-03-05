@@ -1,5 +1,9 @@
 @layer organisms {
-  .navigation .navigation__logo {
-    width: 75cqw;
+  .navigation__logo {
+    width: 10cqw;
+  }
+
+  .navigation__links {
+    list-style: none;
   }
 }
