@@ -1,4 +1,5 @@
 import type IHttpClient from "@/Contracts/IHttpClient";
+import HttpError from "@/Errors/HttpError";
 
 export default class HttpClient implements IHttpClient {
   constructor(private _baseUrl: string) {
@@ -10,7 +11,7 @@ export default class HttpClient implements IHttpClient {
     const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error(`Failed fetching data from ${url}`);
+      throw new HttpError(response.status, url);
     }
 
     return response.json();

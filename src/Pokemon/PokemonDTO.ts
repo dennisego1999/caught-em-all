@@ -1,3 +1,4 @@
+import InvalidPokemonError from "@/Errors/InvalidPokemonError";
 import type IPokemon from "@/Pokemon/IPokemon";
 
 export default class PokemonDTO {
@@ -12,7 +13,7 @@ export default class PokemonDTO {
 
   static fromResponse(data: IPokemon): PokemonDTO {
     if (!PokemonDTO.isValid(data)) {
-      throw new Error("Invalid Pokemon response");
+      throw new InvalidPokemonError();
     }
 
     return new PokemonDTO(data.id, data.name, data.height, data.weight);
