@@ -9,7 +9,7 @@ const app = createApp(App);
 
 app.use(router);
 
-app.config.errorHandler = (error) => {
+app.config.errorHandler = (error, instance, info) => {
   console.error("Unhandled error:", error);
 };
 
