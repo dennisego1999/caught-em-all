@@ -9,6 +9,7 @@ import Text from "@/js/Components/Atoms/Text/Text.vue";
 import Heading from "@/js/Components/Atoms/Heading/Heading.vue";
 import PokemonCard from "@/js/Components/Molecules/PokemonCard/PokemonCard.vue";
 import Button from "@/js/Components/Atoms/Button/Button.vue";
+import Spacer from "@/js/Components/Organisms/Spacer/Spacer.vue";
 
 const isGenerating: Ref<boolean> = ref(false);
 const pokemonA: Ref<PokemonDTO | null> = ref(null);
@@ -76,6 +77,8 @@ onMounted(async () => generateWeightBattle());
           {{ weightComparison }}
         </Text>
       </Transition>
+
+      <Spacer />
 
       <Button :disabled="isGenerating" @click="generateWeightBattle">New battle</Button>
     </Section>
