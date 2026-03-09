@@ -1,4 +1,3 @@
-import type IPokemon from "@/js/Classes/Pokemon/IPokemon";
 import PokemonDTO from "@/js/Classes/Pokemon/PokemonDTO";
 import type IPokemonRepository from "./IPokemonRepository";
 import type IPokemonClient from "./IPokemonClient";
