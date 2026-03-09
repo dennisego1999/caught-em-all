@@ -14,6 +14,7 @@ src/
         │   └── HttpClient.ts
         ├── Contracts/
         │   ├── IHttpClient.ts
+        │   ├── IPokemonClient.ts
         │   └── IRepository.ts
         ├── Errors/
         │   ├── HttpError.ts
@@ -32,31 +33,32 @@ The app follows a `Service → Repository → Client` chain. Each layer has one 
 This means:
 
 - Swap `fetch` for `axios`? Only `HttpClient` changes
-- Backend URL or endpoint changes? Only the `Repository` changes
+- Backend URL or endpoint changes? Only `PokemonClient` changes
 - Business logic changes? Only the `Service` changes
 - Components only ever call the `Service` — they have no knowledge of HTTP, endpoints or data mapping
 
-The contracts (`IHttpClient`, `IRepository<T>`) know nothing about Pokemon — they work for any API you add in the future.
+The contracts (`IHttpClient`, `IRepository<T>`) know nothing about Pokémon business logic — they work for any API you add in the future.
 
 ---
 
 ### Classes
 
-| Class               | Responsibility                          | Notes                                                     |
-| ------------------- | --------------------------------------- | --------------------------------------------------------- |
-| `HttpClient`        | Does HTTP requests                      | No knowledge of any specific API or URL                   |
-| `PokemonClient`     | Configures the PokéAPI connection       | Extends `HttpClient` with the PokéAPI base URL            |
-| `PokemonRepository` | Fetches Pokémon data                    | The only place that changes if an endpoint changes        |
-| `PokemonDTO`        | Validates and maps the raw API response | Acts as the boundary of trust between the API and the app |
-| `PokemonService`    | Applies business logic                  | The only layer components ever interact with              |
+| Class               | Responsibility                          | Notes                                                                |
+| ------------------- | --------------------------------------- | -------------------------------------------------------------------- |
+| `HttpClient`        | Does HTTP requests                      | No knowledge of any specific API or URL                              |
+| `PokemonClient`     | Owns all PokéAPI endpoints              | Extends `HttpClient`, implements `IPokemonClient`, defines all paths |
+| `PokemonRepository` | Fetches and maps Pokémon data           | Calls named client methods — no knowledge of URL structure           |
+| `PokemonDTO`        | Validates and maps the raw API response | Acts as the boundary of trust between the API and the app            |
+| `PokemonService`    | Applies business logic                  | The only layer components ever interact with                         |
 
 ### Contracts
 
-| Contract             | Responsibility                          |
-| -------------------- | --------------------------------------- |
-| `IHttpClient`        | Contract any HTTP client must implement |
-| `IRepository<T>`     | Contract any repository must implement  |
-| `IPokemonRepository` | Contract for the Pokémon repository     |
+| Contract             | Responsibility                                         |
+| -------------------- | ------------------------------------------------------ |
+| `IHttpClient`        | Contract any HTTP client must implement                |
+| `IPokemonClient`     | Contract for the PokéAPI client — defines its methods  |
+| `IRepository<T>`     | Contract any repository must implement                 |
+| `IPokemonRepository` | Extends `IRepository<T>` with Pokémon-specific queries |
 
 ---
 
