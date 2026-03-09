@@ -9,6 +9,7 @@ interface Props {
   cap?: string | null;
   clamp?: string | null;
   variant?: string | null;
+  capitalize?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -19,6 +20,7 @@ const props = withDefaults(defineProps<Props>(), {
   cap: null,
   clamp: null,
   variant: null,
+  capitalize: false,
 });
 
 const { class: _, ...filteredAttrs } = useAttrs() as Record<string, unknown>;
@@ -36,6 +38,7 @@ const { class: _, ...filteredAttrs } = useAttrs() as Record<string, unknown>;
       'data-cap': props.cap,
       'data-clamp': props.clamp,
       'data-variant': props.variant,
+      'data-capitalize': props.capitalize,
     }"
     ><slot
   /></component>

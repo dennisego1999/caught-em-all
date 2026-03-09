@@ -8,8 +8,6 @@ defineProps<{
 
 <template>
   <RouterLink class="link" :to="href">
-    <Text class="link__inner">
-      <slot />
-    </Text>
+    <slot />
   </RouterLink>
 </template>

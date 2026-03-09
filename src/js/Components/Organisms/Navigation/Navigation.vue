@@ -2,6 +2,7 @@
 import Link from "@/js/Components/Atoms/Link/Link.vue";
 import Logo from "@/js/Components/Atoms/Logo/Logo.vue";
 import Section from "@/js/Components/Fundaments/Section/Section.vue";
+import Text from "@/js/Components/Atoms/Text/Text.vue";
 </script>
 
 <template>
@@ -31,10 +32,14 @@ import Section from "@/js/Components/Fundaments/Section/Section.vue";
       gap="tiny"
     >
       <li>
-        <Link href="/weight-battle"> Weight battle </Link>
+        <Link href="/weight-battle">
+          <Text>Weight battle</Text>
+        </Link>
       </li>
       <li>
-        <Link href="/search"> Search </Link>
+        <Link href="/search">
+          <Text>Search</Text>
+        </Link>
       </li>
     </Section>
   </Section>

@@ -87,6 +87,10 @@
     &[data-variant="tint"] {
       color: color-mix(in srgb, var(--color, var(--color-heading)), transparent 25%);
     }
+
+    &[data-capitalize="true"]::first-letter {
+      text-transform: capitalize;
+    }
   }
 
   @for $i from 0 to 7 {
