@@ -24,3 +24,16 @@ html {
 .fade-leave-to {
   opacity: 0;
 }
+
+.card-enter-active,
+.card-leave-active {
+  transition:
+    opacity var(--transition-speed-slow),
+    transform var(--transition-speed-slow);
+}
+
+.card-enter-from,
+.card-leave-to {
+  opacity: 0;
+  transform: scale(0.92);
+}
