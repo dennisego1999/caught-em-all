@@ -9,6 +9,7 @@ import EmptySearchError from "@/js/Classes/Errors/EmptySearchError";
 import HttpError from "@/js/Classes/Errors/HttpError";
 import PokemonCard from "@/js/Components/Molecules/PokemonCard/PokemonCard.vue";
 import Error from "@/js/Components/Atoms/Error/Error.vue";
+import PokemonNotFoundError from "@/js/Classes/Pokemon/PokemonNotFoundError";
 
 const search: Ref<string | null> = ref(null);
 const isLoading: Ref<boolean> = ref(false);
@@ -33,7 +34,11 @@ async function onChange() {
   } catch (e) {
     isError.value = true;
 
-    if (e instanceof EmptySearchError || e instanceof HttpError) {
+    if (
+      e instanceof EmptySearchError ||
+      e instanceof HttpError ||
+      e instanceof PokemonNotFoundError
+    ) {
       console.error(e);
     } else {
       throw e;
