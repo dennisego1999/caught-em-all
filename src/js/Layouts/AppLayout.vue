@@ -6,10 +6,8 @@ import Navigation from "../Components/Organisms/Navigation/Navigation.vue";
   <Navigation />
 
   <RouterView v-slot="{ Component }">
-    <Transition name="fade" mode="out-in" appear>
-      <main>
-        <Component :is="Component" />
-      </main>
-    </Transition>
+    <main>
+      <Component :is="Component" />
+    </main>
   </RouterView>
 </template>
