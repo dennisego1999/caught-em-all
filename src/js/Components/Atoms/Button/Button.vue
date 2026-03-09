@@ -1,18 +1,18 @@
 <script setup lang="ts">
+import { RouterLink } from "vue-router";
+
 interface Props {
   disabled?: boolean;
-  downloadFile?: boolean;
-  downloadName?: string;
   method?: string;
   href?: string | null;
+  external?: boolean;
 }
 
 withDefaults(defineProps<Props>(), {
   disabled: false,
-  downloadFile: false,
-  downloadName: "result",
   method: "get",
   href: null,
+  external: false,
 });
 
 const emit = defineEmits<{
@@ -22,23 +22,26 @@ const emit = defineEmits<{
 
 <template>
   <a
-    v-if="href && downloadFile"
+    v-if="href && external"
     class="button"
     :class="{ 'button--disabled': disabled }"
     :href="href"
-    :download="downloadName"
     @click="emit('click')"
   >
     <slot />
   </a>
 
-  <button
-    v-else
+  <RouterLink
+    v-else-if="href"
     class="button"
-    :class="{ 'base-button--disabled': disabled }"
-    :disabled="disabled"
+    :class="{ 'button--disabled': disabled }"
+    :to="href"
     @click="emit('click')"
   >
+    <slot />
+  </RouterLink>
+
+  <button v-else class="button" :disabled="disabled" @click="emit('click')">
     <slot />
   </button>
 </template>

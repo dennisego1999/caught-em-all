@@ -7,14 +7,18 @@ import InvalidPokemonError from "@/js/Classes/Pokemon/InvalidPokemonError";
 import Section from "@/js/Components/Fundaments/Section/Section.vue";
 import Text from "@/js/Components/Atoms/Text/Text.vue";
 import Heading from "@/js/Components/Atoms/Heading/Heading.vue";
-import PokemonCard from "../../Molecules/PokemonCard/PokemonCard.vue";
+import PokemonCard from "@/js/Components/Molecules/PokemonCard/PokemonCard.vue";
+import Button from "@/js/Components/Atoms/Button/Button.vue";
 
+const isGenerating: Ref<boolean> = ref(false);
 const pokemonA: Ref<PokemonDTO | null> = ref(null);
 const pokemonB: Ref<PokemonDTO | null> = ref(null);
 const weightComparison: Ref<string | null> = ref(null);
 const error: Ref<string | null> = ref(null);
 
-onMounted(async () => {
+async function generateWeightBattle() {
+  isGenerating.value = true;
+
   try {
     pokemonA.value = await PokemonService.instance.findRandom();
     pokemonB.value = await PokemonService.instance.findRandom();
@@ -27,7 +31,11 @@ onMounted(async () => {
       throw e;
     }
   }
-});
+
+  isGenerating.value = false;
+}
+
+onMounted(async () => generateWeightBattle());
 </script>
 
 <template>
@@ -51,14 +59,25 @@ onMounted(async () => {
         justify="center"
         padding="both"
         gap="tiny"
-        wrap="wrap"
+        :wrap="true"
         :size="6"
       >
-        <PokemonCard :pokemon="pokemonA" />
-        <PokemonCard :pokemon="pokemonB" />
+        <Transition name="card" mode="out-in" appear>
+          <PokemonCard :pokemon="pokemonA" :key="pokemonA.id" />
+        </Transition>
+
+        <Transition name="card" mode="out-in" appear>
+          <PokemonCard :pokemon="pokemonB" :key="pokemonB.id" />
+        </Transition>
       </Section>
 
-      <Text v-if="weightComparison" variant="strong">{{ weightComparison }}</Text>
+      <Transition name="fade" mode="out-in" appear>
+        <Text v-if="weightComparison" variant="strong" :key="weightComparison">
+          {{ weightComparison }}
+        </Text>
+      </Transition>
+
+      <Button :disabled="isGenerating" @click="generateWeightBattle">New battle</Button>
     </Section>
   </Section>
 </template>
