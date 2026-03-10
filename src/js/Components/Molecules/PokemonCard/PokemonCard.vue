@@ -4,6 +4,7 @@ import Text from "../../Atoms/Text/Text.vue";
 import Visual from "../Visual/Visual.vue";
 import Heading from "../../Atoms/Heading/Heading.vue";
 import Link from "../../Atoms/Link/Link.vue";
+import PokemonIdentifier from "../../Atoms/PokemonIdentifier/PokemonIdentifier.vue";
 
 defineProps<{
   pokemon: PokemonDTO;
@@ -14,9 +15,7 @@ defineProps<{
   <Link class="pokemon-card" :href="`/pokemon/${pokemon.name}`">
     <article>
       <header class="pokemon-card__header">
-        <Text class="pokemon-card__number" font-size="4">
-          <strong>#{{ pokemon.id }}</strong>
-        </Text>
+        <PokemonIdentifier font-size="4" :id="pokemon.id" />
 
         <Text class="pokemon-card__type" font-size="4">
           <strong>POKéMON</strong>
