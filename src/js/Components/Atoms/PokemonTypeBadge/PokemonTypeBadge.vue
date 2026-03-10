@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <Text class="pokemon-type-badge">
+  <Text class="pokemon-type-badge" :uppercase="true" :data-type="type">
     {{ type }}
   </Text>
 </template>
