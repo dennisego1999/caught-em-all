@@ -25,7 +25,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <progress ref="el" class="progress-bar" :id="id" :value="0" :max="max">
-    <slot />
-  </progress>
+  <progress ref="el" class="progress-bar" :id="id" :value="0" :max="max" />
 </template>
