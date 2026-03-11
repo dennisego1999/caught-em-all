@@ -16,7 +16,7 @@ withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<{
-  submit: [];
+  (e: "submit"): void;
 }>();
 
 const search = defineModel<string | null>({ default: null });
