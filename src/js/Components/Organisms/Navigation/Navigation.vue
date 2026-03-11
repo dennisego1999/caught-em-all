@@ -10,8 +10,6 @@ import Text from "@/js/Components/Atoms/Text/Text.vue";
     class="navigation"
     tag="nav"
     theme="light-tint"
-    padding="both"
-    padding-size="tiny"
     gutter="both"
     flex-direction="row"
     justify="between"
