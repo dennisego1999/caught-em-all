@@ -9,13 +9,13 @@ import Error from "@/js/Components/Atoms/Error/Error.vue";
 import PokemonNotFoundError from "@/js/Classes/Pokemon/PokemonNotFoundError";
 import SearchBar from "@/js/Components/Organisms/SearchBar/SearchBar.vue";
 
-const search: Ref<string | null> = ref(null);
+const searchQuery: Ref<string | null> = ref(null);
 const isLoading: Ref<boolean> = ref(false);
 const isError: Ref<boolean> = ref(false);
 const pokemonResult: Ref<PokemonDTO | null> = ref(null);
 
 async function submit(): Promise<void> {
-  if (!search.value) {
+  if (!searchQuery.value) {
     return;
   }
 
@@ -24,7 +24,7 @@ async function submit(): Promise<void> {
 
   try {
     // Search
-    pokemonResult.value = await PokemonService.instance.search(search.value);
+    pokemonResult.value = await PokemonService.instance.search(searchQuery.value);
   } catch (e) {
     isError.value = true;
 
@@ -45,10 +45,10 @@ function reset(): void {
 }
 
 // Make sure error and result are reset everytime search query changes
-watch(search, reset);
+watch(searchQuery, reset);
 
 onMounted(async () => {
-  if (search.value) {
+  if (searchQuery.value) {
     // Submit if url on mounted already contains search query
     await submit();
   }
@@ -58,7 +58,7 @@ onMounted(async () => {
 <template>
   <Section class="section-search-pokemon">
     <SearchBar
-      v-model="search"
+      v-model="searchQuery"
       placeholder="Find a pokémon"
       :disabled="isLoading"
       @submit="submit"
