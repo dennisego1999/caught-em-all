@@ -80,7 +80,11 @@ onMounted(async () => generateWeightBattle());
 
       <Spacer />
 
-      <Button :disabled="isGenerating" @click="generateWeightBattle">New battle</Button>
+      <Transition name="fade" mode="out-in" appear>
+        <Button v-if="pokemonA && pokemonB" :disabled="isGenerating" @click="generateWeightBattle">
+          New battle
+        </Button>
+      </Transition>
     </Section>
   </Section>
 </template>
