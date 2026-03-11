@@ -16,7 +16,7 @@ const routes = [
     component: WeightBattle,
   },
   {
-    path: "/search",
+    path: "/find-pokemon",
     name: "search_page",
     component: Search,
   },

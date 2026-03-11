@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type PokemonDTO from "@/js/Classes/Pokemon/PokemonDTO";
 import Section from "@/js/Components/Fundaments/Section/Section.vue";
-import { ref, watch, type Ref } from "vue";
+import { onMounted, ref, watch, type Ref } from "vue";
 import PokemonService from "@/js/Classes/Pokemon/PokemonService";
 import HttpError from "@/js/Classes/Errors/HttpError";
 import PokemonCard from "@/js/Components/Molecules/PokemonCard/PokemonCard.vue";
@@ -46,6 +46,13 @@ function reset(): void {
 
 // Make sure error and result are reset everytime search query changes
 watch(search, reset);
+
+onMounted(async () => {
+  if (search.value) {
+    // Submit if url on mounted already contains search query
+    await submit();
+  }
+});
 </script>
 
 <template>

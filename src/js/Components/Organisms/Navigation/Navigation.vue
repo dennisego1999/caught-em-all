@@ -35,8 +35,8 @@ import Text from "@/js/Components/Atoms/Text/Text.vue";
         </Link>
       </li>
       <li>
-        <Link href="/search">
-          <Text>Search</Text>
+        <Link href="/find-pokemon">
+          <Text>Find pokemon</Text>
         </Link>
       </li>
     </Section>
