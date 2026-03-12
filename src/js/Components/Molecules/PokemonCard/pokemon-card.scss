@@ -27,6 +27,12 @@
     }
   }
 
+  .card__content:has(.pokemon-card__sprite-placeholder) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .pokemon-card__sprite-placeholder {
     color: var(--color-text);
   }

@@ -6,13 +6,35 @@ import Section from "@/js/Components/Fundaments/Section/Section.vue";
 import Heading from "@/js/Components/Atoms/Heading/Heading.vue";
 import PokemonCard from "@/js/Components/Molecules/PokemonCard/PokemonCard.vue";
 import Text from "@/js/Components/Atoms/Text/Text.vue";
+import Button from "@/js/Components/Atoms/Button/Button.vue";
 
 let offset: number = 0;
-const results: Ref<PokemonDTO[] | null> = ref(null);
+const limit: number = 12;
+const results: Ref<PokemonDTO[]> = ref([]);
+const hasNext: Ref<boolean> = ref(true);
+const isFetching: Ref<boolean> = ref(false);
 
-onMounted(async () => {
-  results.value = await PokemonService.instance.findAll(offset);
-});
+async function fetchPokemons() {
+  // Set fetching state
+  isFetching.value = true;
+
+  // Update offset
+  offset += limit;
+
+  // Get the next batch
+  const { pokemons, hasNext: next } = await PokemonService.instance.findAll(offset, limit);
+
+  // Check if next
+  hasNext.value = next;
+
+  // Add to results list
+  results.value.push(...pokemons);
+
+  // Reset fetching state
+  isFetching.value = false;
+}
+
+onMounted(async () => fetchPokemons());
 </script>
 
 <template>
@@ -33,7 +55,7 @@ onMounted(async () => {
     </Text>
 
     <Section
-      v-if="results && Array.isArray(results) && results.length"
+      v-if="results.length > 0"
       class="section-pokemon-overview"
       flex-direction="row"
       gap="extra-tiny"
@@ -41,5 +63,9 @@ onMounted(async () => {
     >
       <PokemonCard v-for="pokemon in results" :pokemon="pokemon" />
     </Section>
+
+    <Button v-if="hasNext && results.length > 0" :disabled="isFetching" @click="fetchPokemons"
+      >Load more</Button
+    >
   </Section>
 </template>

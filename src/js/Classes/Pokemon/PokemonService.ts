@@ -60,9 +60,12 @@ export default class PokemonService {
    * Note: fires one request per Pokémon in parallel on top of the list request.
    * @param offset - Number of Pokémon to skip. Defaults to 0.
    * @param limit - Number of Pokémon to fetch per page. Defaults to 12.
-   * @returns A promise resolving to an array of PokemonDTOs.
+   * @returns A promise resolving to the Pokémon in the current page and whether there is a next page.
    */
-  public async findAll(offset = 0, limit = 12): Promise<PokemonDTO[]> {
+  public async findAll(
+    offset = 0,
+    limit = 12,
+  ): Promise<{ pokemons: PokemonDTO[]; hasNext: boolean }> {
     return this.repo.findAll(offset, limit);
   }
 }

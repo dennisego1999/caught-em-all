@@ -35,9 +35,19 @@ export default class PokemonRepository implements IPokemonRepository {
     }
   }
 
-  async findAll(offset: number, limit: number): Promise<PokemonDTO[]> {
+  async findAll(
+    offset: number,
+    limit: number,
+  ): Promise<{ pokemons: PokemonDTO[]; hasNext: boolean }> {
     const list = await this.client.getPokemonList(offset, limit);
 
-    return Promise.all(list.results.map((p) => this.findByName(p.name)));
+    /**
+     * PokéAPI's list endpoint only returns { name, url } per Pokémon — there is no
+     * bulk endpoint that returns full Pokémon data. We therefore fetch each Pokémon
+     * individually by name.
+     */
+    const pokemons = await Promise.all(list.results.map((p) => this.findByName(p.name)));
+
+    return { pokemons, hasNext: list.next !== null };
   }
 }
