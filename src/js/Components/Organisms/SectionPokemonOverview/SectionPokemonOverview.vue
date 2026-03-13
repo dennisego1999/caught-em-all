@@ -87,7 +87,7 @@ onMounted(async () => {
     </TransitionGroup>
 
     <Transition name="fade">
-      <Error v-if="displayedResults.length === 0" :key="'error'">
+      <Error v-if="displayedResults.length === 0 && !isFetching && searchQuery" :key="'error'">
         Failed to find a Pokémon for '{{ searchQuery }}'
       </Error>
     </Transition>

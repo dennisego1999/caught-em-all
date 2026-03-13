@@ -1,5 +1,6 @@
 import type PokemonDTO from "@/js/Classes/Pokemon/PokemonDTO";
-import type IPokemonRepository from "./IPokemonRepository";
+import type IPokemonRepository from "@/js/Classes/Pokemon/IPokemonRepository";
+import type IPokemonPage from "@/js/Classes/Pokemon/IPokemonPage";
 
 export default class PokemonService {
   private static _instance: PokemonService;
@@ -62,10 +63,7 @@ export default class PokemonService {
    * @param limit - Number of Pokémon to fetch per page. Defaults to 12.
    * @returns A promise resolving to the Pokémon in the current page and whether there is a next page.
    */
-  public async findAll(
-    offset = 0,
-    limit = 12,
-  ): Promise<{ pokemons: PokemonDTO[]; hasNext: boolean }> {
+  public async findAll(offset = 0, limit = 12): Promise<IPokemonPage> {
     return this.repo.findAll(offset, limit);
   }
 }

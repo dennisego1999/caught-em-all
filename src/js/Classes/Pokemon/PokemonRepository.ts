@@ -3,6 +3,7 @@ import PokemonDTO from "@/js/Classes/Pokemon/PokemonDTO";
 import type IPokemonRepository from "@/js/Classes/Pokemon/IPokemonRepository";
 import HttpError from "@/js/Classes/Errors/HttpError";
 import PokemonNotFoundError from "@/js/Classes/Pokemon/PokemonNotFoundError";
+import type IPokemonPage from "@/js/Classes/Pokemon/IPokemonPage";
 
 export default class PokemonRepository implements IPokemonRepository {
   constructor(private client: IPokemonClient) {
@@ -35,10 +36,7 @@ export default class PokemonRepository implements IPokemonRepository {
     }
   }
 
-  async findAll(
-    offset: number,
-    limit: number,
-  ): Promise<{ pokemons: PokemonDTO[]; hasNext: boolean }> {
+  async findAll(offset: number, limit: number): Promise<IPokemonPage> {
     const list = await this.client.getPokemonList(offset, limit);
 
     /**
