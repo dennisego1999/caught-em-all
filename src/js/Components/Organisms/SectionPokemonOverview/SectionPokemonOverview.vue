@@ -22,7 +22,7 @@ const isFetching: Ref<boolean> = ref(false);
 const searchQuery: Ref<string | null> = ref(null);
 const isSearchError: Ref<boolean> = ref(false);
 
-async function fetchPokemons(): Promise<void> {
+async function fetchPokemonPage(): Promise<void> {
   // Set fetching state
   isFetching.value = true;
 
@@ -42,7 +42,7 @@ async function fetchPokemons(): Promise<void> {
   isFetching.value = false;
 }
 
-async function submit(): Promise<void> {
+async function search(): Promise<void> {
   if (!searchQuery.value) {
     // Reset to full local results when query is cleared
     displayedResults.value = pageResults.value;
@@ -89,10 +89,8 @@ watch(searchQuery, () => {
 });
 
 onMounted(async () => {
-  await fetchPokemons();
-
-  // Initialize displayed results with local results
-  displayedResults.value = pageResults.value;
+  await fetchPokemonPage();
+  await search();
 });
 </script>
 
@@ -113,7 +111,7 @@ onMounted(async () => {
       and it wasn't going to be me.
     </Text>
 
-    <SearchBar v-model="searchQuery" :disabled="isFetching" @submit="submit" />
+    <SearchBar v-model="searchQuery" :disabled="isFetching" @submit="search" />
 
     <TransitionGroup
       v-if="displayedResults.length > 0"
@@ -141,7 +139,7 @@ onMounted(async () => {
     <Transition name="fade" mode="out-in">
       <Button
         v-if="hasNext && displayedResults.length > 0 && !isFetching && !searchQuery"
-        @click="fetchPokemons"
+        @click="fetchPokemonPage"
       >
         Load more
       </Button>
