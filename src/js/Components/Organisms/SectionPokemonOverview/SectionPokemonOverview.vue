@@ -83,9 +83,14 @@ async function search(): Promise<void> {
   isFetching.value = false;
 }
 
-// Reset error when query changes
-watch(searchQuery, () => {
+// Reset
+watch(searchQuery, async (value) => {
   isSearchError.value = false;
+
+  if (value === "" || !value) {
+    // Trigger search when search query is empty to diplay pageResults again
+    await search();
+  }
 });
 
 onMounted(async () => {
