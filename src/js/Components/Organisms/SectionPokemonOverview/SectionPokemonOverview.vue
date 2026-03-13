@@ -15,12 +15,11 @@ import PokemonNotFoundError from "@/js/Classes/Pokemon/PokemonNotFoundError";
 
 let offset: number = 0;
 const limit: number = 12;
-const localResults: Ref<PokemonDTO[]> = ref([]);
+const pageResults: Ref<PokemonDTO[]> = ref([]);
 const displayedResults: Ref<PokemonDTO[]> = ref([]);
 const hasNext: Ref<boolean> = ref(true);
 const isFetching: Ref<boolean> = ref(false);
 const searchQuery: Ref<string | null> = ref(null);
-const searchResult: Ref<PokemonDTO | null> = ref(null);
 const isSearchError: Ref<boolean> = ref(false);
 
 async function fetchPokemons(): Promise<void> {
@@ -34,7 +33,7 @@ async function fetchPokemons(): Promise<void> {
   hasNext.value = next;
 
   // Add to results list
-  localResults.value.push(...pokemons);
+  pageResults.value.push(...pokemons);
 
   // Increment offset
   offset += limit;
@@ -46,12 +45,12 @@ async function fetchPokemons(): Promise<void> {
 async function submit(): Promise<void> {
   if (!searchQuery.value) {
     // Reset to full local results when query is cleared
-    displayedResults.value = localResults.value;
+    displayedResults.value = pageResults.value;
     return;
   }
 
   // Filter already-loaded results first
-  const localMatches = localResults.value.filter((pokemon) =>
+  const localMatches = pageResults.value.filter((pokemon) =>
     pokemon.name.toLowerCase().includes(searchQuery.value!.toLowerCase()),
   );
 
@@ -86,7 +85,6 @@ async function submit(): Promise<void> {
 
 // Reset API result and error when query changes
 watch(searchQuery, () => {
-  searchResult.value = null;
   isSearchError.value = false;
 });
 
@@ -94,7 +92,7 @@ onMounted(async () => {
   await fetchPokemons();
 
   // Initialize displayed results with local results
-  displayedResults.value = localResults.value;
+  displayedResults.value = pageResults.value;
 });
 </script>
 
