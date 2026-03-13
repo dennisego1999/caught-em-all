@@ -56,7 +56,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Section class="section-search-pokemon">
+  <Section
+    class="section-search-pokemon"
+    theme="dark"
+    gutter="both"
+    padding="top"
+    :background="true"
+  >
     <SearchBar
       v-model="searchQuery"
       placeholder="Find a pokémon"
@@ -64,12 +70,7 @@ onMounted(async () => {
       @submit="submit"
     />
 
-    <Section
-      class="section-search-pokemon__result"
-      padding="both"
-      padding-size="tiny"
-      gutter="both"
-    >
+    <Section class="section-search-pokemon__result" padding="both" padding-size="tiny">
       <Transition name="card">
         <PokemonCard v-if="pokemonResult" :pokemon="pokemonResult" :key="pokemonResult.id" />
       </Transition>
