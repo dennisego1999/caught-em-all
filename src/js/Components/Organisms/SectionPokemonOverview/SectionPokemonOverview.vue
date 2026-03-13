@@ -66,8 +66,8 @@ onMounted(async () => {
 
     <Text>
       Every. Single. One. From the iconic to the "why does this exist," here's every Pokémon ever
-      crammed into one scrollable fever dream. Pulled fresh from PokéAPI, because apparently someone
-      had to catalogue 1000+ creatures and it wasn't going to be us.
+      crammed into one scrollable fever dream. PApparently someone had to catalogue 1000+ creatures
+      and it wasn't going to be me.
     </Text>
 
     <SearchBar v-model="searchQuery" :disabled="isFetching" />
